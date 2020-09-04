@@ -1,16 +1,17 @@
 package controller
 
 import (
-	"github.com/tayron/go-cep/application/entity"
 	"encoding/json"
 	"net/http"
 	"strconv"
+
+	"github.com/tayron/go-cep/application/entity"
 
 	"github.com/gorilla/mux"
 	"github.com/tayron/go-cep/application/service"
 )
 
-const errorMessage = "Erro lendo CEP"
+const errorMessage = "Erro ao consultar frete"
 
 func Home(rw http.ResponseWriter, req *http.Request) {
 	_, err := rw.Write([]byte([]byte("ping")))
@@ -25,16 +26,15 @@ func GetFrete(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 
 	parametrosCorrerios := entity.ParametroCorrerios{
-		CodigoServicoDesejado = vars["codigo_servido_desejado"],
-		CepOrigem = vars["cep_origem"],
-		CepDestino = vars["cep_destino"],
-		Peso = vars["peso"],
-		Altura = vars["altura"],
-		Largura = vars["largura"],
-		Comprimento = vars["comprimento"],
-		ValorProduto = vars["valor_produto"],
+		CodigoServicoDesejado: vars["codigo_servido_desejado"],
+		CepOrigem:             vars["cep_origem"],
+		CepDestino:            vars["cep_destino"],
+		Peso:                  vars["peso"],
+		Altura:                vars["altura"],
+		Largura:               vars["largura"],
+		Comprimento:           vars["comprimento"],
+		ValorProduto:          vars["valor_produto"],
 	}
-
 
 	frete, err := service.CalcularFrete(parametrosCorrerios)
 	if err != nil {

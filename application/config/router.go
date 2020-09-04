@@ -12,6 +12,6 @@ func LoadHouter() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", controller.Home)
-	router.HandleFunc("/frete", controller.GetFrete)
+	router.HandleFunc("/frete", controller.GetFrete).Methods("POST")
 	http.Handle("/", router)
 }

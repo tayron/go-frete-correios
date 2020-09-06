@@ -7,7 +7,6 @@ import (
 
 	"github.com/tayron/go-cep/application/entity"
 
-	"github.com/gorilla/mux"
 	"github.com/tayron/go-cep/application/service"
 )
 
@@ -22,30 +21,27 @@ func Home(rw http.ResponseWriter, req *http.Request) {
 }
 
 func GetFrete(rw http.ResponseWriter, req *http.Request) {
-	vars := mux.Vars(req)
 	rw.Header().Set("Content-Type", "application/json")
 
 	parametrosCorrerios := entity.ParametroCorrerios{
-		CodigoServicoDesejado: vars["codigo_servido_desejado"],
-		CepOrigem:             vars["cep_origem"],
-		CepDestino:            vars["cep_destino"],
-		Peso:                  vars["peso"],
-		Altura:                vars["altura"],
-		Largura:               vars["largura"],
-		Comprimento:           vars["comprimento"],
-		ValorProduto:          vars["valor_produto"],
+		CodigoServicoDesejado: req.FormValue("codigo_servido_desejado"),
+		CepOrigem:             req.FormValue("cep_origem"),
+		CepDestino:            req.FormValue("cep_destino"),
+		Peso:                  req.FormValue("peso"),
+		Altura:                req.FormValue("altura"),
+		Largura:               req.FormValue("largura"),
+		Comprimento:           req.FormValue("comprimento"),
+		ValorProduto:          req.FormValue("valor_produto"),
 	}
 
 	frete, err := service.CalcularFrete(parametrosCorrerios)
+
 	if err != nil {
-		respondWithError(rw, http.StatusUnauthorized, err.Error(), errorMessage)
-		return
+		panic(err)
 	}
-	_, err = rw.Write([]byte(frete))
-	if err != nil {
-		respondWithError(rw, http.StatusUnauthorized, err.Error(), errorMessage)
-		return
-	}
+
+	rw.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(rw).Encode(frete)
 }
 
 //RespondWithError return a http error

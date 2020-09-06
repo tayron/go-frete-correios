@@ -1,26 +1,32 @@
 package service
 
 import (
-	"encoding/json"
+	"bytes"
+	"encoding/xml"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 
+	"github.com/rogpeppe/go-charset/charset"
+	_ "github.com/rogpeppe/go-charset/data"
 	"github.com/tayron/go-cep/application/entity"
 )
 
 type Frete struct {
-	Cep         string `json:"cep"`
-	Logradouro  string `json:"logradouro"`
-	Complemento string `json:"complemento"`
-	Bairro      string `json:"bairro"`
-	Localidade  string `json:"localidade"`
-	Uf          string `json:"uf"`
-	Unidade     string `json:"unidade"`
-	Ibge        string `json:"ibge"`
-	Gia         string `json:"gia"`
+	CServico struct {
+		Codigo                string `xml:"Codigo"`
+		Valor                 string `xml:"Valor"`
+		PrazoEntrega          string `xml:"PrazoEntrega"`
+		ValorSemAdicionais    string `xml:"ValorSemAdicionais"`
+		ValorMaoPropria       string `xml:"ValorMaoPropria"`
+		ValorAvisoRecebimento string `xml:"ValorAvisoRecebimento"`
+		ValorValorDeclarado   string `xml:"ValorValorDeclarado"`
+		EntregaDomiciliar     string `xml:"EntregaDomiciliar"`
+		EntregaSabado         string `xml:"EntregaSabado"`
+	} `xml:"cServico" json:"frete"`
 }
 
-const urlCorrerios = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=%s&sCepDestino=%s&nVlPeso=%s&nCdFormato=1&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s&sCdMaoPropria=n&nVlValorDeclarado=%s&sCdAvisoRecebimento=n&nCdServico=%s&nVlDiametro=0&StrRetorno=json"
+const urlCorrerios = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=%s&sCepDestino=%s&nVlPeso=%s&nCdFormato=1&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s&sCdMaoPropria=n&nVlValorDeclarado=%s&sCdAvisoRecebimento=n&nCdServico=%s&nVlDiametro=0&StrRetorno=xml"
 
 func montarUrlApiCorrerios(parametros entity.ParametroCorrerios) string {
 	return fmt.Sprintf(urlCorrerios,
@@ -35,26 +41,30 @@ func montarUrlApiCorrerios(parametros entity.ParametroCorrerios) string {
 	)
 }
 
-func CalcularFrete(parametros entity.ParametroCorrerios) (string, error) {
+func CalcularFrete(parametros entity.ParametroCorrerios) (Frete, error) {
 
+	var frete Frete
 	urlAPICorrerios := montarUrlApiCorrerios(parametros)
-
-	fmt.Println(urlAPICorrerios)
 
 	req, err := http.Get(urlAPICorrerios)
 	if err != nil {
-		return "", err
+		return frete, err
 	}
 
-	var frete Frete
-	err = json.NewDecoder(req.Body).Decode(&frete)
+	data, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		return "", err
-	}
-	res, err := json.Marshal(frete)
-	if err != nil {
-		return "", err
+		return frete, err
 	}
 
-	return string(res), nil
+	reader := bytes.NewReader(data)
+	decoder := xml.NewDecoder(reader)
+	decoder.CharsetReader = charset.NewReader
+
+	errDecode := decoder.Decode(&frete)
+
+	if errDecode != nil {
+		return frete, errDecode
+	}
+
+	return frete, nil
 }

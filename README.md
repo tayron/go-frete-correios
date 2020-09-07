@@ -18,7 +18,7 @@ informando onde a aplicação estará sendo executada:
 Para rodar os tests, execute o comando: ```env AMBIENTE=desenvolvimento go test```
 
 ## Uso
-Basta enviar uma requisição POSt para a url ```http://localhost:3000/frete```
+Basta enviar uma requisição POST para a url ```http://localhost:3000/frete```
 com as seguintes informações, exemplo:
 * codigo_servido_desejado: 41106
 * cep_origem: 11680000
@@ -28,6 +28,23 @@ com as seguintes informações, exemplo:
 * largura: 22
 * comprimento: 32
 * valor_produto: 0
+
+O retorno será:
+```
+{
+  "frete": {
+    "Codigo": "41106",
+    "Valor": "29,40",
+    "PrazoEntrega": "14",
+    "ValorSemAdicionais": "29,40",
+    "ValorMaoPropria": "0,00",
+    "ValorAvisoRecebimento": "0,00",
+    "ValorValorDeclarado": "0,00",
+    "EntregaDomiciliar": "S",
+    "EntregaSabado": "N"
+  }
+}
+```
 
 Exempĺo da requisição:
 ![Alt text](./exemplo_requisicao.png?raw=true "Exemplo requisição")

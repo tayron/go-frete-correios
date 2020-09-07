@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tayron/go-cep/application/entity"
-	"github.com/tayron/go-cep/application/service"
+	"github.com/tayron/go-frete-correios/application/entity"
+	"github.com/tayron/go-frete-correios/application/service"
 )
 
 func Test_CalcularFrete(t *testing.T) {

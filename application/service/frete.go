@@ -9,7 +9,7 @@ import (
 
 	"github.com/rogpeppe/go-charset/charset"
 	_ "github.com/rogpeppe/go-charset/data"
-	"github.com/tayron/go-cep/application/entity"
+	"github.com/tayron/go-frete-correios/application/entity"
 )
 
 type Frete struct {

@@ -5,7 +5,7 @@ After=network.target
 User=root
 Group=www-data
 
-ExecStart=/usr/local/gocep/go-cep
+ExecStart=/usr/local/gofrete/go-frete
 
 Restart=on-failure
 RestartSec=30

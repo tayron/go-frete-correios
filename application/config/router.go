@@ -3,7 +3,7 @@ package config
 import (
 	"net/http"
 
-	"github.com/tayron/go-cep/application/controller"
+	"github.com/tayron/go-frete-correios/application/controller"
 
 	"github.com/gorilla/mux"
 )

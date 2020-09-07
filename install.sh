@@ -1,14 +1,14 @@
 #!/bin/bash
 
-diretorioAplicacao="/usr/local/gocep/"
-nomeArquivoAplicacao="go-cep"
+diretorioAplicacao="/usr/local/gofrete/"
+nomeArquivoAplicacao="go-frete"
 nomeArquivoConfiguracao=".env"
 
-nomeServico="go-cep"
-nomeArquivoServico="go-cep.service"
+nomeServico="go-frete"
+nomeArquivoServico="go-frete.service"
 caminhoScriptServicoLinux="/etc/systemd/system/"
 
-echo "GO-CEP - Serviço de consulta de endereço por CEP"
+echo "GO-FRETE - Serviço de consulta de endereço por FRETE"
 echo 
 
 if [ -e $diretorioAplicacao ] && rm -R $diretorioAplicacao; then

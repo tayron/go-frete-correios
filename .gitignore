@@ -23,6 +23,6 @@ _testmain.go
 *.test
 *.prof
 src
-go-cep
+go-frete
 vendor/
 .idea

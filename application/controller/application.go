@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/tayron/go-cep/application/entity"
+	"github.com/tayron/go-frete-correios/application/entity"
 
-	"github.com/tayron/go-cep/application/service"
+	"github.com/tayron/go-frete-correios/application/service"
 )
 
 const errorMessage = "Erro ao consultar frete"

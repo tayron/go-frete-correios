@@ -10,8 +10,8 @@ import (
 
 	"github.com/gorilla/context"
 	"github.com/joho/godotenv"
-	"github.com/tayron/go-cep/application/config"
-	"github.com/tayron/go-cep/application/util"
+	"github.com/tayron/go-frete-correios/application/config"
+	"github.com/tayron/go-frete-correios/application/util"
 )
 
 func init() {

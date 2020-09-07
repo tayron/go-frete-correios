@@ -1,11 +1,11 @@
 #!/bin/bash
 
 diretorioAplicacao="/usr/local/gofrete/"
-nomeArquivoAplicacao="go-frete"
+nomeArquivoAplicacao="go-frete-correios"
 nomeArquivoConfiguracao=".env"
 
-nomeServico="go-frete"
-nomeArquivoServico="go-frete.service"
+nomeServico="go-frete-correios"
+nomeArquivoServico="go-frete-correios.service"
 caminhoScriptServicoLinux="/etc/systemd/system/"
 
 echo "GO-FRETE - Serviço de consulta de endereço por FRETE"

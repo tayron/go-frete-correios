@@ -1,11 +1,11 @@
 #!/bin/bash
 diretorioAplicacao="/usr/local/gocep/"
 
-nomeServico="go-cep"
-nomeArquivoServico="go-cep.service"
+nomeServico="go-frete-correios"
+nomeArquivoServico="go-frete-correios.service"
 caminhoScriptServicoLinux="/etc/systemd/system/"
 
-echo "Desinstalando GO-CEP - Serviço de consulta de endereço por CEP"
+echo "Desinstalando GO-FRETE - Serviço de consulta de endereço por FRETE"
 echo 
 
 if service $nomeServico stop; then

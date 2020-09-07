@@ -1,6 +1,6 @@
 package entity
 
-type ParametroCorrerios struct {
+type ParametroCorreios struct {
 	CodigoServicoDesejado string
 	CepOrigem             string
 	CepDestino            string

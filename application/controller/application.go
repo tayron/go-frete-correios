@@ -23,7 +23,7 @@ func Home(rw http.ResponseWriter, req *http.Request) {
 func GetFrete(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 
-	parametrosCorrerios := entity.ParametroCorrerios{
+	parametrosCorreios := entity.ParametroCorreios{
 		CodigoServicoDesejado: req.FormValue("codigo_servido_desejado"),
 		CepOrigem:             req.FormValue("cep_origem"),
 		CepDestino:            req.FormValue("cep_destino"),
@@ -34,7 +34,7 @@ func GetFrete(rw http.ResponseWriter, req *http.Request) {
 		ValorProduto:          req.FormValue("valor_produto"),
 	}
 
-	frete, err := service.CalcularFrete(parametrosCorrerios)
+	frete, err := service.CalcularFrete(parametrosCorreios)
 
 	if err != nil {
 		panic(err)

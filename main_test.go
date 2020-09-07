@@ -11,7 +11,7 @@ import (
 func Test_CalcularFrete(t *testing.T) {
 
 	t.Run("invalid frete", func(t *testing.T) {
-		var parametros entity.ParametroCorrerios = entity.ParametroCorrerios{
+		var parametros entity.ParametroCorreios = entity.ParametroCorreios{
 			CodigoServicoDesejado: "4110699999",
 			CepOrigem:             "11680000",
 			CepDestino:            "82220000",
@@ -31,7 +31,7 @@ func Test_CalcularFrete(t *testing.T) {
 	})
 
 	t.Run("valid frete", func(t *testing.T) {
-		var parametros entity.ParametroCorrerios = entity.ParametroCorrerios{
+		var parametros entity.ParametroCorreios = entity.ParametroCorreios{
 			CodigoServicoDesejado: "41106",
 			CepOrigem:             "11680000",
 			CepDestino:            "82220000",

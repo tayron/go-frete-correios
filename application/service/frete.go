@@ -26,10 +26,10 @@ type Frete struct {
 	} `xml:"cServico" json:"frete"`
 }
 
-const urlCorrerios = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=%s&sCepDestino=%s&nVlPeso=%s&nCdFormato=1&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s&sCdMaoPropria=n&nVlValorDeclarado=%s&sCdAvisoRecebimento=n&nCdServico=%s&nVlDiametro=0&StrRetorno=xml"
+const urlCorreios = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=%s&sCepDestino=%s&nVlPeso=%s&nCdFormato=1&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s&sCdMaoPropria=n&nVlValorDeclarado=%s&sCdAvisoRecebimento=n&nCdServico=%s&nVlDiametro=0&StrRetorno=xml"
 
-func montarUrlApiCorrerios(parametros entity.ParametroCorrerios) string {
-	return fmt.Sprintf(urlCorrerios,
+func montarUrlApiCorreios(parametros entity.ParametroCorreios) string {
+	return fmt.Sprintf(urlCorreios,
 		parametros.CepOrigem,
 		parametros.CepDestino,
 		parametros.Peso,
@@ -41,12 +41,12 @@ func montarUrlApiCorrerios(parametros entity.ParametroCorrerios) string {
 	)
 }
 
-func CalcularFrete(parametros entity.ParametroCorrerios) (Frete, error) {
+func CalcularFrete(parametros entity.ParametroCorreios) (Frete, error) {
 
 	var frete Frete
-	urlAPICorrerios := montarUrlApiCorrerios(parametros)
+	urlAPICorreios := montarUrlApiCorreios(parametros)
 
-	req, err := http.Get(urlAPICorrerios)
+	req, err := http.Get(urlAPICorreios)
 	if err != nil {
 		return frete, err
 	}

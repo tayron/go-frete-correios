@@ -1,6 +1,9 @@
 # GO FRETE CORREIOS
 API em Golang para consulta de valor de frete pelos correios
 
+## Configuração
+É possível configurar em qual porta o serviço irá ser executado alterando arquivo *.env*
+
 ## Compilar
 Além de ter o Go instalado no sistema operacional é necessário executar o comando ```go build```
 e um binário com nome de *go-cep* será criado na raiz do projeto.
@@ -35,26 +38,31 @@ basta executar o arquivo *install.sh* como root, exemplo: ```sudo ./install```
 
 Feito isso a seguinte mensagem deve aparecer:
 ```
-GO-CEP - Serviço de consulta de endereço por CEP
+GO-FRETE - Serviço de consulta de endereço por FRETE
 
-[√] Arquivos da aplicação copiado para /usr/local/gocep/
+[√] Removido instalação antiga
+[√] Arquivos da aplicação copiado para /usr/local/gofrete/
 [√] Permissões setadas
-[√] Arquivo go-cep.service copiado para /etc/systemd/system/go-cep.service
+[√] Arquivo go-frete-correios.service copiado para /etc/systemd/system/go-frete-correios.service
 [√] Atualizando lista de serviços do sistema operacional
 [√] Executando serviço
 
 
-● go-cep.service
-   Loaded: loaded (/etc/systemd/system/go-cep.service; disabled; vendor preset: enabled)
-   Active: active (running) since Fri 2020-09-04 10:48:55 -03; 10ms ago
- Main PID: 3296 (go-cep)
-    Tasks: 3 (limit: 4915)
-   CGroup: /system.slice/go-cep.service
-           └─3296 /usr/local/gocep/go-cep
+● go-frete-correios.service
+   Loaded: loaded (/etc/systemd/system/go-frete-correios.service; disabled; vendor preset: enabled)
+   Active: active (running) since Mon 2020-09-07 17:36:14 BRT; 38ms ago
+ Main PID: 1365 (go-frete-correi)
+    Tasks: 6
+   Memory: 6.6M
+      CPU: 8ms
+   CGroup: /system.slice/go-frete-correios.service
+           └─1365 /usr/local/gofrete/go-frete-correios
 
-set 04 10:48:55 constance-IPMH110G-DDR3 systemd[1]: Started go-cep.service.
+Sep 07 17:36:14 tayron-ThinkPad-T420 systemd[1]: Started go-frete-correios.service.
+Sep 07 17:36:14 tayron-ThinkPad-T420 go-frete-correios[1365]: Arquivo de configuração: /usr/local/gofrete/.env
+Sep 07 17:36:14 tayron-ThinkPad-T420 go-frete-correios[1365]: Servidor executando no endereço: http://127.0.0.1:3003
 
-Fim da instalação, em caso de problema execute o comando: [ journalctl -u go-cep -f ] para mais detalhes
+Fim da instalação, em caso de problema execute o comando: [ journalctl -u go-frete-correios -f ] para mais detalhes
 ```
 Ao executar o comando *journalctl -u go-cep -f* verá em qual endereço e porta a aplicação está acessível
 
@@ -71,10 +79,9 @@ Para desinstalar basta executar o comando: ```sudo ./uninstall.sh```
 
 Feito isso a seguinte mensagem deve aparecer:
 ```
-Desinstalando GO-CEP - Serviço de consulta de endereço por CEP
+Desinstalando GO-FRETE - Serviço de consulta de endereço por FRETE
 
 [√] Parando serviço
-[√] Removendo instalação antiga
 [√] Removendo serviço antigo
 [√] Atualizando lista de serviços do sistema operacional
 

@@ -14,15 +14,15 @@ import (
 
 type Frete struct {
 	CServico struct {
-		Codigo                string `xml:"Codigo"`
-		Valor                 string `xml:"Valor"`
-		PrazoEntrega          string `xml:"PrazoEntrega"`
-		ValorSemAdicionais    string `xml:"ValorSemAdicionais"`
-		ValorMaoPropria       string `xml:"ValorMaoPropria"`
-		ValorAvisoRecebimento string `xml:"ValorAvisoRecebimento"`
-		ValorValorDeclarado   string `xml:"ValorValorDeclarado"`
-		EntregaDomiciliar     string `xml:"EntregaDomiciliar"`
-		EntregaSabado         string `xml:"EntregaSabado"`
+		Codigo                string `xml:"Codigo" json:"codigo"`
+		Valor                 string `xml:"Valor" json:"valor"`
+		PrazoEntrega          string `xml:"PrazoEntrega" json:"prazoEntrega"`
+		ValorSemAdicionais    string `xml:"ValorSemAdicionais" json:"valorSemAdicionais"`
+		ValorMaoPropria       string `xml:"ValorMaoPropria" json:"valorNaoPropria"`
+		ValorAvisoRecebimento string `xml:"ValorAvisoRecebimento" json:"valorAvisoRecebimento"`
+		ValorDeclarado        string `xml:"ValorValorDeclarado" json:"valorDeclarado"`
+		EntregaDomiciliar     string `xml:"EntregaDomiciliar" json:"entregaDomicializar"`
+		EntregaSabado         string `xml:"EntregaSabado" json:"entregaSabado"`
 	} `xml:"cServico" json:"frete"`
 }
 

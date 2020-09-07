@@ -33,15 +33,15 @@ O retorno será:
 ```
 {
   "frete": {
-    "Codigo": "41106",
-    "Valor": "29,40",
-    "PrazoEntrega": "14",
-    "ValorSemAdicionais": "29,40",
-    "ValorMaoPropria": "0,00",
-    "ValorAvisoRecebimento": "0,00",
-    "ValorValorDeclarado": "0,00",
-    "EntregaDomiciliar": "S",
-    "EntregaSabado": "N"
+    "codigo": "41106",
+    "valor": "29,40",
+    "prazoEntrega": "14",
+    "valorSemAdicionais": "29,40",
+    "valorNaoPropria": "0,00",
+    "valorAvisoRecebimento": "0,00",
+    "valorDeclarado": "0,00",
+    "entregaDomicializar": "S",
+    "entregaSabado": "N"
   }
 }
 ```

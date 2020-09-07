@@ -1,60 +1,50 @@
 package main
 
 import (
-	"encoding/json"
-	"os"
 	"testing"
 
-	"github.com/tayron/go-cep/application/service"
 	"github.com/stretchr/testify/assert"
+	"github.com/tayron/go-cep/application/entity"
+	"github.com/tayron/go-cep/application/service"
 )
 
-func removeCacheFile(t *testing.T, id string) {
-	assert.Nil(t, os.Remove(service.GetCacheFilename(id)))
-}
+func Test_CalcularFrete(t *testing.T) {
 
-func Test_getCacheFilename(t *testing.T) {
-	id := "89201405"
-	idWithDash := "89201-405"
+	t.Run("invalid frete", func(t *testing.T) {
+		var parametros entity.ParametroCorrerios = entity.ParametroCorrerios{
+			CodigoServicoDesejado: "4110699999",
+			CepOrigem:             "11680000",
+			CepDestino:            "82220000",
+			Peso:                  "1",
+			Altura:                "15",
+			Largura:               "22",
+			Comprimento:           "32",
+			ValorProduto:          "0",
+		}
 
-	assert.Equal(t, service.GetCacheFilename(id), os.TempDir()+"/cep"+id)
-	assert.Equal(t, service.GetCacheFilename(idWithDash), os.TempDir()+"/cep"+id)
-}
+		frete, err := service.CalcularFrete(parametros)
 
-func Test_getCep(t *testing.T) {
-	t.Run("invalid cep", func(t *testing.T) {
-		id := "0000000"
-		wrongCep, err := service.GetCep(id)
-		assert.Equal(t, "", wrongCep)
-		assert.Error(t, err)
-	})
-	t.Run("valid cep", func(t *testing.T) {
-
-		id := "60170150"
-		cepJSON, err := service.GetCep(id)
 		assert.Nil(t, err)
-		res := service.Cep{}
-		assert.Nil(t, json.Unmarshal([]byte(cepJSON), &res))
-
-		assert.Equal(t, "60170-150", res.Cep)
-		assert.Equal(t, "Rua Vicente Leite", res.Logradouro)
-		assert.Equal(t, "até 879/880", res.Complemento)
-		assert.Equal(t, "Meireles", res.Bairro)
-		assert.Equal(t, "Fortaleza", res.Localidade)
-		assert.Equal(t, "CE", res.Uf)
-		assert.Equal(t, "", res.Unidade)
-		assert.Equal(t, "2304400", res.Ibge)
-		assert.Equal(t, "", res.Gia)
-
-		removeCacheFile(t, id)
+		assert.Equal(t, "4110699999", frete.CServico.Codigo)
+		assert.Equal(t, "0", frete.CServico.PrazoEntrega)
+		assert.Equal(t, "0,00", frete.CServico.Valor)
 	})
-}
 
-func Test_Cache(t *testing.T) {
-	id := "89201405"
-	_, err := service.GetCep(id) // Add to temporary_directory_path/cep89201405
-	assert.Nil(t, err)
-	_, err = os.Stat(service.GetCacheFilename(id))
-	assert.Nil(t, err)
-	removeCacheFile(t, id)
+	t.Run("valid frete", func(t *testing.T) {
+		var parametros entity.ParametroCorrerios = entity.ParametroCorrerios{
+			CodigoServicoDesejado: "41106",
+			CepOrigem:             "11680000",
+			CepDestino:            "82220000",
+			Peso:                  "1",
+			Altura:                "15",
+			Largura:               "22",
+			Comprimento:           "32",
+			ValorProduto:          "0",
+		}
+
+		frete, err := service.CalcularFrete(parametros)
+
+		assert.Nil(t, err)
+		assert.Equal(t, "41106", frete.CServico.Codigo)
+	})
 }

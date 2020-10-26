@@ -5,7 +5,7 @@ API em Golang para consulta de valor de frete pelos correios
 É possível configurar em qual porta o serviço irá ser executado alterando arquivo *.env*
 
 ## Compilar
-Além de ter o Go instalado no sistema operacional é necessário executar o comando ```go build```
+Além de ter o Go instalado no sistema operacional é necessário executar o comando ```go build -ldflags "-s -w" -o go-frete-correios main.go```
 e um binário com nome de *go-cep* será criado na raiz do projeto.
 
 ## Executar
@@ -45,6 +45,39 @@ O retorno será:
   }
 }
 ```
+
+## Código do serviço desejado
+
+### Código comuns utilizados em loja virtual
+* 40215 = SEDEX 10
+* 40045 = SEDEX À COBRAR
+* 40010 = SEDEX
+* 41106 = PAC
+
+### Todos os códigos disponíveis pelos nos Correrios
+* 84050 = FAC Registrado
+* 82031 = FAC Simples
+* 20010 = Impresso Normal
+* 14036 = Mala Direta Domiciliária
+* 14010 = Mala Direta Básica e Especial
+* 44105 = Malote
+* 04510 = PAC
+* 04693 = PAC Grandes Formatos
+* 04707 = PAC Pagamento na Entrega
+* 43010 = Reembolso Postal 
+* 36200 = Remessa Econômica 
+* 40355 = Remessa Expressa - CRLV/CRV/CNH 
+* 40622 = Remessa Expressa Talão/Cartão 
+* 75043 = Remessa Local com Comprovação de Entrega
+* 04014 = SEDEX
+* 40215 = SEDEX 10
+* 40169 = SEDEX 12
+* 04138 = SEDEX Contrato Grandes Formatos     
+* 40290 = SEDEX HOJE
+* 03662 = SEDEX HOJE COLABORAT A FATURAR 
+* 03670 = SEDEX HOJE DESVIO COLAB A FATURAR 
+* 04065 = SEDEX Pagamento na Entrega
+
 
 Exempĺo da requisição:
 ![Alt text](./exemplo_requisicao.png?raw=true "Exemplo requisição")
@@ -104,3 +137,6 @@ Desinstalando GO-FRETE - Serviço de consulta de endereço por FRETE
 
 Desinstalação concluída
 ```
+
+## Exemplos de uso
+Dentro da pasta *exemplos-uso* você encontrará exemplo de utilização da API nas linguagens JAVA, Javascript, PHP e Python.
